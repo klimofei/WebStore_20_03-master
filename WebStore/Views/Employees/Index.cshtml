@@ -38,14 +38,17 @@
         </tbody>
     </table>
     <form>
-        <button>Добавить сотрудника</button>
+        <button asp-controller="Employees" asp-action="AddEmployee">Добавить сотрудника</button>
     </form>
 </div>
 
 @section Styles{
     <style>
         #employees-table {
-            background: red
+           
+        }
+        #AddEmp  {
+
         }
     </style>
 }

@@ -46,5 +46,20 @@ namespace WebStore.Controllers
                 return NotFound();
             return View(employee);
         }
+        
+        public IActionResult AddEmployee()
+        {
+            var employee = new Employee()
+            {
+                FirstName = "Новый сотрудник",
+                SurName = "Новый сотрудник",
+                Patronymic = "Новый сотрудник",
+                Id = __Employees.Count + 1,
+                Age = 44
+            };
+            __Employees.Add(employee);
+            return View(employee);
+        }
+
     }
 }
