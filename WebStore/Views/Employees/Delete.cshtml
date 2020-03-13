@@ -1,4 +1,4 @@
-﻿@model WebStore.Models.Employee
+﻿@model EmployeeViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -19,16 +19,16 @@
                     @Html.DisplayFor(model => model.Id)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(model => model.FirstName)
+                    @Html.DisplayNameFor(model => model.Name)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.FirstName)
+                    @Html.DisplayFor(model => model.Name)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(model => model.SurName)
+                    @Html.DisplayNameFor(model => model.SecondName)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.SurName)
+                    @Html.DisplayFor(model => model.SecondName)
                 </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.Patronymic)
