@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.Data;
 using WebStore.Models;
 
 namespace WebStore.Controllers
@@ -10,40 +11,14 @@ namespace WebStore.Controllers
     //[Route("users")]
     public class EmployeesController : Controller
     {
-        private static readonly List<Employee> __Employees = new List<Employee>
-        {
-            new Employee
-            {
-                Id = 1,
-                SurName = "Иванов",
-                FirstName = "Иван",
-                Patronymic = "Иванович",
-                Age = 39
-            },
-            new Employee
-            {
-                Id = 2,
-                SurName = "Петров",
-                FirstName = "Пётр",
-                Patronymic = "Петрович",
-                Age = 18
-            },
-            new Employee
-            {
-                Id = 3,
-                SurName = "Сидоров",
-                FirstName = "Сидор",
-                Patronymic = "Сидорович",
-                Age = 27
-            },
-        };
+       
 
        // [Route("employees")]
-        public IActionResult Index() => View(__Employees);
+        public IActionResult Index() => View(TestData.Employees);
 
         public IActionResult Details(int Id)
         {
-            var employee = __Employees.FirstOrDefault(e => e.Id == Id);
+            var employee = TestData.Employees.FirstOrDefault(e => e.Id == Id);
             if (employee is null)
                 return NotFound();
             return View(employee);
@@ -57,10 +32,10 @@ namespace WebStore.Controllers
                 FirstName = "Новый сотрудник",
                 SurName = "Новый сотрудник",
                 Patronymic = "Новый сотрудник",
-                Id = __Employees.Count + 1,
+                Id = TestData.Employees.Count + 1,
                 Age = 44
             };
-            __Employees.Add(employee);
+            TestData.Employees.Add(employee);
             return View(employee);
         }
 
