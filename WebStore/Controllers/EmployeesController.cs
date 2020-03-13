@@ -3,62 +3,94 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.Data;
+using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
 
 namespace WebStore.Controllers
 {
+    //[Route("users")]
     public class EmployeesController : Controller
     {
-        private static readonly List<Employee> __Employees = new List<Employee>
-        {
-            new Employee
-            {
-                Id = 1,
-                SurName = "Иванов",
-                FirstName = "Иван",
-                Patronymic = "Иванович",
-                Age = 39
-            },
-            new Employee
-            {
-                Id = 2,
-                SurName = "Петров",
-                FirstName = "Пётр",
-                Patronymic = "Петрович",
-                Age = 18
-            },
-            new Employee
-            {
-                Id = 3,
-                SurName = "Сидоров",
-                FirstName = "Сидор",
-                Patronymic = "Сидорович",
-                Age = 27
-            },
-        };
 
-        public IActionResult Index() => View(__Employees);
+        private readonly IEmployeesData _EmployeesData;
+
+        public EmployeesController(IEmployeesData EmployeesData) => _EmployeesData = EmployeesData;
+
+        // [Route("employees")]
+        public IActionResult Index() => View(_EmployeesData.GetAll());
 
         public IActionResult Details(int Id)
         {
-            var employee = __Employees.FirstOrDefault(e => e.Id == Id);
+            var employee = _EmployeesData.GetById(Id);
             if (employee is null)
                 return NotFound();
             return View(employee);
         }
-        
-        public IActionResult AddEmployee()
+
+        //[Route("employee/{Id}")]
+        //public IActionResult AddEmployee()
+        //{
+        //    var employee = new Employee()
+        //    {
+        //        FirstName = "Новый сотрудник",
+        //        SurName = "Новый сотрудник",
+        //        Patronymic = "Новый сотрудник",
+        //        Id = TestData.Employees.Count + 1,
+        //        Age = 44
+        //    };
+        //    TestData.Employees.Add(employee);
+        //    return View(employee);
+        //}
+
+        public IActionResult Edit(int? Id)
         {
-            var employee = new Employee()
-            {
-                FirstName = "Новый сотрудник",
-                SurName = "Новый сотрудник",
-                Patronymic = "Новый сотрудник",
-                Id = __Employees.Count + 1,
-                Age = 44
-            };
-            __Employees.Add(employee);
+
+            if (Id is null) 
+                return View(new Employee());
+
+            if (Id < 0) 
+                return BadRequest();
+
+            var employee = _EmployeesData.GetById((int)Id);
+            if (employee is null)
+                return NotFound();
+
             return View(employee);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Employee Employee)
+        {
+
+            if (Employee is null)
+                throw new ArgumentNullException(nameof(Employee));
+
+            if (!ModelState.IsValid)
+                return View(Employee);
+
+            var id = Employee.Id;
+
+            if (id == 0)
+                _EmployeesData.Add(Employee);
+            else
+                _EmployeesData.Edit(id, Employee);
+
+            _EmployeesData.SaveChanges();
+
+            return RedirectToAction("Index");
+
+            //if (Id is null)
+            //    return View(new Employee());
+
+            //if (Id < 0)
+            //    return BadRequest();
+
+            //var employee = _EmployeesData.GetById((int)Id);
+            //if (employee is null)
+            //    return NotFound();
+
+            //return View(employee);
         }
 
     }
