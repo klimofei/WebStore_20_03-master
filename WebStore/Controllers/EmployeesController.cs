@@ -29,27 +29,13 @@ namespace WebStore.Controllers
         }
 
         //[Route("employee/{Id}")]
-        //public IActionResult AddEmployee()
-        //{
-        //    var employee = new Employee()
-        //    {
-        //        FirstName = "Новый сотрудник",
-        //        SurName = "Новый сотрудник",
-        //        Patronymic = "Новый сотрудник",
-        //        Id = TestData.Employees.Count + 1,
-        //        Age = 44
-        //    };
-        //    TestData.Employees.Add(employee);
-        //    return View(employee);
-        //}
-
         public IActionResult Edit(int? Id)
         {
 
-            if (Id is null) 
+            if (Id is null)
                 return View(new Employee());
 
-            if (Id < 0) 
+            if (Id < 0)
                 return BadRequest();
 
             var employee = _EmployeesData.GetById((int)Id);
@@ -79,18 +65,6 @@ namespace WebStore.Controllers
             _EmployeesData.SaveChanges();
 
             return RedirectToAction("Index");
-
-            //if (Id is null)
-            //    return View(new Employee());
-
-            //if (Id < 0)
-            //    return BadRequest();
-
-            //var employee = _EmployeesData.GetById((int)Id);
-            //if (employee is null)
-            //    return NotFound();
-
-            //return View(employee);
         }
 
         public IActionResult Create()
@@ -105,7 +79,7 @@ namespace WebStore.Controllers
             if (Employee is null)
                 throw new ArgumentNullException(nameof(Employee));
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return View(Employee);
 
             _EmployeesData.Add(Employee);
@@ -116,5 +90,27 @@ namespace WebStore.Controllers
 
         }
 
+        public IActionResult Delete(int id)
+        {
+            // Через Get запрос
+            //_EmployeesData.Delete(id);
+            //return RedirectToAction("Index");
+
+            if (id <= 0) return BadRequest();
+
+            var employee = _EmployeesData.GetById(id);
+            if (employee is null)
+                return NotFound();
+
+            return View(employee);
+
+        }
+
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _EmployeesData.Delete(id);
+            _EmployeesData.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
