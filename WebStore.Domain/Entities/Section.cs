@@ -16,6 +16,6 @@ namespace WebStore.Domain.Entities
        /// <summary>
        /// Идентификатор родительской секции
        /// </summary>
-        public int? PartentId { get; set; }
+        public int? ParentId { get; set; }
     }
 }
