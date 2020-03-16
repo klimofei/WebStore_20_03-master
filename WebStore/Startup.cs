@@ -24,6 +24,7 @@ namespace WebStore
             //AddSingleton - one object for the whole app's lifetime
 
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            services.AddSingleton<IProductData, InMemoryProductData>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
