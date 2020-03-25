@@ -1,7 +1,6 @@
 ﻿@model  IEnumerable<SectionViewModel>
 
-    <h2>
-        Категории/h2>
+    <h2>Категории</h2>
         <div class="panel-group category-products" id="accordian">
             <!--category-productsr-->
             @foreach (var parent_section in Model)
@@ -11,13 +10,13 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordian" href="#@parent_section.Name.ToLower()">
+                                <a data-toggle="collapse" data-parent="#accordian" href="#@parent_section.GetHashCode().ToString()">
                                     <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                    Sportswear
+                                    @parent_section.Name
                                 </a>
                             </h4>
                         </div>
-                        <div id="@parent_section.Name.ToLower()" class="panel-collapse collapse">
+                        <div id="@parent_section.GetHashCode().ToString()" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <ul>
                                     @foreach (var child_section in parent_section.ChildSections)
