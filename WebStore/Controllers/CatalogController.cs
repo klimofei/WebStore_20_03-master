@@ -42,7 +42,8 @@ namespace WebStore.Controllers
 
         public IActionResult Details()
         {
-            return View();
+            return View(); 
+
         }
     }
 }
