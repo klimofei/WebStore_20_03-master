@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using WebStore.Domain.Entities.Base.Interfaces;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebStore.Domain.Entities.Base
 {
@@ -10,6 +12,8 @@ namespace WebStore.Domain.Entities.Base
     /// </summary>
     public abstract class NamedEntity : BaseEntity, INamedEntity
     {
-        public string Name { get; set; }
+        //[Required, StringLength(250)]
+        [Required]
+        public string Name { get; set; } 
     }
 }
