@@ -4,14 +4,15 @@
 @{
     ViewData["Title"] = "Регистрация нового пользователя";
 }
-
 <section id="form">
     <!--form-->
+    <div class="container">
+        <div class="row">
             <div class="col-sm-4">
                 <div class="signup-form">
                     <!--sign up form-->
-                    <h2>Регистрация пользователя</h2>
-                    <form asp-controller="Account" asp-action="Register" method="post">
+                    <h2>Зарегистрироваться</h2>
+                    <form asp-controller="Account" asp-action="Register" asp-antiforgery="true" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                         <input asp-for="UserName" placeholder="Имя пользователя" />
@@ -27,4 +28,6 @@
                     </form>
                 </div><!--/sign up form-->
             </div>
+        </div>
+    </div>
 </section><!--/form-->
