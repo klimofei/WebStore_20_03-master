@@ -16,20 +16,20 @@ namespace WebStore.Controllers
 
         public CatalogController(IProductData ProductData) => _ProductData = ProductData;
 
-        public IActionResult Shop(int? _SectionId, int? _BrandId)
+        public IActionResult Shop(int? SectionId, int? BrandId)
         {
             var filter = new ProductFilter
             {
-                SectionId = _SectionId,
-                BrandId = _BrandId
+                SectionId = SectionId,
+                BrandId = BrandId
             };
 
             var products = _ProductData.GetProducts(filter);
              
             return View(new CatalogViewModel
             {
-                SectionId = _SectionId,
-                BrandId = _BrandId,
+                SectionId = SectionId,
+                BrandId = BrandId,
                 Products = products.Select(ProductMapping.ToView).OrderBy(p => p.Order)
             });
         }
