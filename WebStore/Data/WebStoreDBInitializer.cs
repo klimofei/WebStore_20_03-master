@@ -25,7 +25,7 @@ namespace WebStore.Data
 
         public void Initialize() => InitializeAsync().Wait();
 
-        public async Task InitializeAsync ()
+        public async Task InitializeAsync()
         {
             var db = _db.Database;
             //if (await db.EnsureDeletedAsync().ConfigureAwait(false))
@@ -36,9 +36,13 @@ namespace WebStore.Data
             await InitializeIdentityAsync().ConfigureAwait(false);
 
             await db.MigrateAsync().ConfigureAwait(false);
+        }
 
+        private async Task InitializeProductsAsync()
+        {
             if (await _db.Products.AnyAsync()) return;
 
+            var db = _db.Database;
             using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
             {
                 await _db.Sections.AddRangeAsync(TestData.Sections).ConfigureAwait(false);
