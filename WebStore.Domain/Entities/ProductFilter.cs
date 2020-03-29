@@ -10,5 +10,7 @@ namespace WebStore.Domain.Entities
 
         public int? BrandId { get; set; }
 
+        public List<int> Ids { get; set; }
+
     }
 }

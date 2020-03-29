@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Data;
+using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
 using WebStore.ViewModels;
@@ -11,6 +13,7 @@ using WebStore.ViewModels;
 namespace WebStore.Controllers
 {
     //[Route("users")]
+    [Authorize]
     public class EmployeesController : Controller
     {
 
@@ -44,6 +47,7 @@ namespace WebStore.Controllers
         }
 
         //[Route("employee/{Id}")]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Edit(int? Id)
         {
 
@@ -67,7 +71,8 @@ namespace WebStore.Controllers
             });
         }
 
-        [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Edit(EmployeeViewModel Employee)
         {
 
@@ -103,13 +108,15 @@ namespace WebStore.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Create()
         {
             return View(new EmployeeViewModel());
 
         }
 
-        [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Create(EmployeeViewModel Employee)
         {
             if (Employee is null)
@@ -138,6 +145,7 @@ namespace WebStore.Controllers
 
         }
 
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Delete(int id)
         {
             // Через Get запрос
@@ -161,6 +169,7 @@ namespace WebStore.Controllers
 
         }
 
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult DeleteConfirmed(int id)
         {
             _EmployeesData.Delete(id);

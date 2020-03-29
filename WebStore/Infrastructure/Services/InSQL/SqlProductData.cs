@@ -30,9 +30,16 @@ namespace WebStore.Infrastructure.Services.InSQL
             if (Filter?.SectionId != null)
                 query = query.Where(product => product.SectionId == Filter.SectionId);
 
+            if(Filter?.Ids?.Count > 0)
+                query = query.Where(product => Filter.Ids.Contains(product.Id));
+
             return query;
 
         }
 
+        public Product GetProductById(int id) => _db.Products
+                                                    .Include(p => p.Brand)
+                                                    .Include(p => p.Section)
+                                                    .FirstOrDefault(p => p.Id == id);
     }
 }
