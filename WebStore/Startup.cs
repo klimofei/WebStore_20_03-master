@@ -105,13 +105,14 @@ namespace WebStore
                     await context.Response.WriteAsync(Configuration["CustomGreetings"]);
                 });
 
-                endpoints.MapControllerRoute(
-                    name: "default", 
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+                // важнее тот маршрут, который выше ы этом методе
                 endpoints.MapControllerRoute(
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "default", 
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
 
             });
         }
