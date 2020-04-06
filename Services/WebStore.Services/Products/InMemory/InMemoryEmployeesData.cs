@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using WebStore.Data;
-using WebStore.Infrastructure.Interfaces;
-using WebStore.Models;
+using WebStore.Domain.Models;
+using WebStore.Interfaces.Services;
+using WebStore.Services.Data;
 
 namespace WebStore.Infrastructure.Services
 {
