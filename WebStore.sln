@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Service", ".Service", "{EB
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.ServiceHosting", "Services\WebStore.ServiceHosting\WebStore.ServiceHosting.csproj", "{D3D8E8A1-339D-4500-8BAF-BE1606213B61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{7157DCBA-45A3-4F69-BE77-414BD3F0008E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7157DCBA-45A3-4F69-BE77-414BD3F0008E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7157DCBA-45A3-4F69-BE77-414BD3F0008E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3D8E8A1-339D-4500-8BAF-BE1606213B61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3D8E8A1-339D-4500-8BAF-BE1606213B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3D8E8A1-339D-4500-8BAF-BE1606213B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3D8E8A1-339D-4500-8BAF-BE1606213B61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{9825F6C4-5D2D-4C00-8C7B-555EAF30E342} = {011851C1-7327-4F7C-AA91-0C730E4EF3F2}
 		{C9E9A3A9-3307-4FE8-9AC7-68E2350B4C96} = {18610738-EB13-4A49-AB9E-DB59DFA2E154}
 		{7157DCBA-45A3-4F69-BE77-414BD3F0008E} = {6B301509-7197-4A54-881E-739F0E4DB7C9}
+		{D3D8E8A1-339D-4500-8BAF-BE1606213B61} = {18610738-EB13-4A49-AB9E-DB59DFA2E154}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {03B48D7A-D1FA-42B8-B4B5-E9BA9125FA87}
