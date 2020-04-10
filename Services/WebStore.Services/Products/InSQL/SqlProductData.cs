@@ -16,9 +16,13 @@ namespace WebStore.Infrastructure.Services.InSQL
         public SqlProductData(WebStoreDB db) => _db = db;
 
 
-        public IEnumerable<Section> GetSections() => _db.Sections.Include(section => section.Products).AsEnumerable();
+        public IEnumerable<Section> GetSections() => _db.Sections
+                                                    //.Include(section => section.Products)
+                                                    .AsEnumerable();
 
-        public IEnumerable<Brand> GetBrands() => _db.Brands.Include(brand => brand.Products).AsEnumerable();
+        public IEnumerable<Brand> GetBrands() => _db.Brands
+                                                    //.Include(brand => brand.Products)
+                                                    .AsEnumerable();
 
         public IEnumerable<ProductDTO> GetProducts(ProductFilter Filter = null)
         {
