@@ -3,7 +3,9 @@ using System.Linq;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using WebStore.Domain.DTO.Products;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Mapping;
 
 namespace WebStore.Infrastructure.Services.InSQL
 {
@@ -14,13 +16,19 @@ namespace WebStore.Infrastructure.Services.InSQL
         public SqlProductData(WebStoreDB db) => _db = db;
 
 
-        public IEnumerable<Section> GetSections() => _db.Sections.Include(section => section.Products).AsEnumerable();
+        public IEnumerable<Section> GetSections() => _db.Sections
+                                                    //.Include(section => section.Products)
+                                                    .AsEnumerable();
 
-        public IEnumerable<Brand> GetBrands() => _db.Brands.Include(brand => brand.Products).AsEnumerable();
+        public IEnumerable<Brand> GetBrands() => _db.Brands
+                                                    //.Include(brand => brand.Products)
+                                                    .AsEnumerable();
 
-        public IEnumerable<Product> GetProducts(ProductFilter Filter = null)
+        public IEnumerable<ProductDTO> GetProducts(ProductFilter Filter = null)
         {
-            IQueryable<Product> query = _db.Products;
+            IQueryable<Product> query = _db.Products
+                                        .Include(p=>p.Section)
+                                        .Include(p => p.Brand);
 
             if (Filter?.BrandId != null)
                 query = query.Where(product => product.BrandId == Filter.BrandId);
@@ -31,13 +39,14 @@ namespace WebStore.Infrastructure.Services.InSQL
             if(Filter?.Ids?.Count > 0)
                 query = query.Where(product => Filter.Ids.Contains(product.Id));
 
-            return query;
+            return query.AsEnumerable().Select(p => p.ToDTO());
 
         }
 
-        public Product GetProductById(int id) => _db.Products
+        public ProductDTO GetProductById(int id) => _db.Products
                                                     .Include(p => p.Brand)
                                                     .Include(p => p.Section)
-                                                    .FirstOrDefault(p => p.Id == id);
+                                                    .FirstOrDefault(p => p.Id == id)
+                                                    .ToDTO();
     }
 }
