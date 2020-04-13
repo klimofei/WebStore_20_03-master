@@ -32,9 +32,9 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<WebStoreDB>(opt => 
-                                              opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<WebStoreDBInitializer>();
+            //services.AddDbContext<WebStoreDB>(opt => 
+            //                                  opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddTransient<WebStoreDBInitializer>();
 
             services.AddIdentity<User, Role>()
                     //.AddEntityFrameworkStores<WebStoreDB>()
