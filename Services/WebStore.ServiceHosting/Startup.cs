@@ -13,6 +13,7 @@ using WebStore.Infrastructure.Services;
 using WebStore.Infrastructure.Services.InCookies;
 using WebStore.Infrastructure.Services.InSQL;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Data;
 
 namespace WebStore.ServiceHosting
 {
@@ -30,14 +31,23 @@ namespace WebStore.ServiceHosting
         {
             services.AddControllers();
 
+            #region Серивисы бизнес-логики
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IOrderService, SqlOrderService>();
             services.AddScoped<ICartService, CookiesCartService>();
+            #endregion
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            #region База данных
             services.AddDbContext<WebStoreDB>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<WebStoreDBInitializer>();
+            #endregion
+
+
+            #region Identity
 
             services.AddIdentity<User, Role>(opt =>
                 {
@@ -57,6 +67,7 @@ namespace WebStore.ServiceHosting
                 })
                 .AddEntityFrameworkStores<WebStoreDB>()
                 .AddDefaultTokenProviders();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
