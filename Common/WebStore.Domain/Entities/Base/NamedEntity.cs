@@ -3,11 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebStore.Domain.Entities.Base
 {
-    /// <summary>
-    /// Абстарктный класс именованной сущности
-    /// </summary>
+    /// <summary>Именованная сущность</summary>
     public abstract class NamedEntity : BaseEntity, INamedEntity
     {
+        /// <summary>Имя</summary>
         //[Required, StringLength(250)]
         [Required]
         public string Name { get; set; } 
