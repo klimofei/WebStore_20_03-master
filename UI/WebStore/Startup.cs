@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using AutoMapper;
 using WebStore.Clients.Employees;
 using WebStore.Clients.Identity;
 using WebStore.Clients.Orders;
@@ -14,6 +15,7 @@ using WebStore.Clients.Products;
 using WebStore.Clients.Values;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Infrastructure.AutoMapper;
 using WebStore.Infrastructure.Services;
 using WebStore.Infrastructure.Services.InCookies;
 using WebStore.Infrastructure.Services.InSQL;
@@ -31,6 +33,12 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddAutoMapper(opt =>
+            {
+                opt.AddProfile<DTOMapping>();
+                opt.AddProfile<ViewModelsMapping>();
+            }, typeof(Startup));
 
             //services.AddDbContext<WebStoreDB>(opt => 
             //                                  opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
