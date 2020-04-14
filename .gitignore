@@ -344,3 +344,5 @@ UI/WebStore/wwwroot/css/site.css
 UI/WebStore/wwwroot/js/site.min.js.gz
 UI/WebStore/wwwroot/js/site.min.js
 UI/WebStore/wwwroot/js/site.js
+/Services/WebStore.ServiceHosting/WebStore.ServiceHosting.xml
+/Common/WebStore.Domain/WebStore.Domain.xml
