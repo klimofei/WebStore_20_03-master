@@ -26,6 +26,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+[Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -346,3 +347,5 @@ UI/WebStore/wwwroot/js/site.min.js
 UI/WebStore/wwwroot/js/site.js
 /Services/WebStore.ServiceHosting/WebStore.ServiceHosting.xml
 /Common/WebStore.Domain/WebStore.Domain.xml
+/Services/WebStore.ServiceHosting/Logs
+/UI/WebStore/Logs/

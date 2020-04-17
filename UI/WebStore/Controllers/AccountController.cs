@@ -32,16 +32,16 @@ namespace WebStore.Controllers
                 return View(Model);
 
             var user = Mapper.Map<User>(Model);
-            using (_Logger.BeginScope($"Создание нового пользователя {Model.UserName}"))
+            using (_Logger.BeginScope($"New user creation {Model.UserName}"))
             {
                 var register_result = await _UserManager.CreateAsync(user, Model.Password);
                 if (register_result.Succeeded)
                 {
-                    _Logger.LogInformation($"Пользователь {Model.UserName} успешно зарегистрирован");
+                    _Logger.LogInformation($"User {Model.UserName} sucsesfully registered");
 
                     await _UserManager.AddToRoleAsync(user, Role.User);
 
-                    _Logger.LogInformation("Пользователю {0} добавлена роль {1}",
+                    _Logger.LogInformation("For User {0} added the role {1}",
                         Model.UserName, Role.User);
 
                     await _SignInManager.SignInAsync(user, false);
@@ -51,7 +51,7 @@ namespace WebStore.Controllers
                 foreach (var error in register_result.Errors)
                     ModelState.AddModelError(string.Empty, error.Description);
 
-                _Logger.LogWarning("Ошибка при создании пользователя {0}:{1}",
+                _Logger.LogWarning("User creation error {0}:{1}",
                     Model.UserName, string.Join(", ", register_result.Errors.Select(e => e.Description)));
             }
 
