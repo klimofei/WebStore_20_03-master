@@ -35,8 +35,8 @@ namespace WebStore.Tests.Controllers
 
             Assert.Equal(expected_result.Length, model.Count());
 
-            //value_service_mock.Verify(service => service.GetAsync());
-            //value_service_mock.VerifyNoOtherCalls();
+            value_service_mock.Verify(service => service.GetAsync());
+            value_service_mock.VerifyNoOtherCalls();
         }
     }
 }
