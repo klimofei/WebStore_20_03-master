@@ -19,7 +19,7 @@ namespace WebStore.Controllers
 
         //public IActionResult Cart() => View();
 
-        public IActionResult CheckOut() => View();
+        //public IActionResult CheckOut() => View();
 
         public IActionResult ContactUs() => View();
 
@@ -28,5 +28,7 @@ namespace WebStore.Controllers
         //public IActionResult Shop() => View();
 
         //public IActionResult ProductDetails() => View();
+
+        public IActionResult ErrorStatus(string Code) => RedirectToAction(nameof(Error404));
     }
 }
