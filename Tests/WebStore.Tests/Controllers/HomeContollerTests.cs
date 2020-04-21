@@ -60,52 +60,52 @@ namespace WebStore.Tests.Controllers
             Assert.IsType<ViewResult>(result);
         }
 
-        //[TestMethod, ExpectedException(typeof(ApplicationException))]
-        //public void Throw_Thrown_ApplicationException()
-        //{
-        //    var controller = new HomeController();
+        [TestMethod, ExpectedException(typeof(ApplicationException))]
+        public void Throw_Thrown_ApplicationException()
+        {
+            var controller = new HomeController();
 
-        //    const string expected_exception_text = "123";
+            const string expected_exception_text = "123";
 
-        //    var result = controller.Throw(expected_exception_text);
+            var result = controller.Throw(expected_exception_text);
 
-        //    Assert.IsType<ViewResult>(result);
-        //}
+            Assert.IsType<ViewResult>(result);
+        }
 
-        //[TestMethod]
-        //public void Throw_Thrown_ApplicationException2()
-        //{
-        //    var controller = new HomeController();
+        [TestMethod]
+        public void Throw_Thrown_ApplicationException2()
+        {
+            var controller = new HomeController();
 
-        //    const string expected_exception_text = "123";
+            const string expected_exception_text = "123";
 
-        //    var exception = Assert.Throws<ApplicationException>(() => controller.Throw(expected_exception_text));
+            var exception = Assert.Throws<ApplicationException>(() => controller.Throw(expected_exception_text));
 
-        //    Assert.Equal(expected_exception_text, exception.Message);
-        //}
+            Assert.Equal(expected_exception_text, exception.Message);
+        }
 
-        //[TestMethod]
-        //public void Error404_Returns_View()
-        //{
-        //    var controller = new HomeController();
+        [TestMethod]
+        public void Error404_Returns_View()
+        {
+            var controller = new HomeController();
 
-        //    var result = controller.Error404();
+            var result = controller.Error404();
 
-        //    Assert.IsType<ViewResult>(result);
-        //}
+            Assert.IsType<ViewResult>(result);
+        }
 
-        //[TestMethod]
-        //public void ErrorStatus_404_RedirectTo_Error404()
-        //{
-        //    var controller = new HomeController();
+        [TestMethod]
+        public void ErrorStatus_404_RedirectTo_Error404()
+        {
+            var controller = new HomeController();
 
-        //    const string status_code = "404";
+            const string status_code = "404";
 
-        //    var result = controller.ErrorStatus(status_code);
+            var result = controller.ErrorStatus(status_code);
 
-        //    var redirect_to_action = Assert.IsType<RedirectToActionResult>(result); //(RedirectToActionResult) result;
-        //    Assert.Null(redirect_to_action.ControllerName);
-        //    Assert.Equal(nameof(HomeController.Error404), redirect_to_action.ActionName);
-        //}
+            var redirect_to_action = Assert.IsType<RedirectToActionResult>(result); //(RedirectToActionResult) result;
+            Assert.Null(redirect_to_action.ControllerName);
+            Assert.Equal(nameof(HomeController.Error404), redirect_to_action.ActionName);
+        }
     }
 }

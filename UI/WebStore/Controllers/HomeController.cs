@@ -28,5 +28,7 @@ namespace WebStore.Controllers
         //public IActionResult Shop() => View();
 
         //public IActionResult ProductDetails() => View();
+
+        public IActionResult ErrorStatus(string Code) => RedirectToAction(nameof(Error404));
     }
 }
