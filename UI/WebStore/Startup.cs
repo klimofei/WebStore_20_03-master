@@ -25,6 +25,8 @@ using WebStore.Interfaces.Api;
 using WebStore.Interfaces.Services;
 using WebStore.Logger;
 using WebStore.Services.Data;
+using WebStore.Services.Products;
+using WebStore.Services.Products.InCookies;
 
 namespace WebStore
 {
@@ -102,17 +104,17 @@ namespace WebStore
             //AddTransient - every time it will be new object
             //AddScoped - single copy per scope
             //AddSingleton - one object for the whole app's lifetime
-
             //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddSingleton<IEmployeesData, EmployeesClient>();
-
             //services.AddSingleton<IProductData, InMemoryProductData>();
             //services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IProductData, ProductsClient>();
-
-            services.AddScoped<ICartService, CookiesCartService>();
+            //services.AddScoped<ICartService, CookiesCartService>();
+            services.AddScoped<ICartService, CartService>();
             //services.AddScoped<IOrderService, SqlOrderService>();
+            services.AddScoped<ICartStore, CookiesCartStore>();
             services.AddScoped<IOrderService, OrdersClient>();
+
 
             services.AddScoped<IValuesService, ValuesClient>();
         }
