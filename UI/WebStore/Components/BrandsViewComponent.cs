@@ -12,9 +12,15 @@ namespace WebStore.Components
 
         public BrandsViewComponent(IProductData ProductData) => _ProductData = ProductData;
 
-        public IViewComponentResult Invoke() => View(GetBrands());
+        public IViewComponentResult Invoke(string BrandId) =>
+            View(new BrandCompleteViewModel
+            {
+                Brands = GetBrands(),
+                CurrentBrandId = int.TryParse(BrandId, out var id) ? id : (int?)null
+            });
 
-        public IEnumerable<BrandViewModel> GetBrands() => _ProductData.GetBrands()
+        public IEnumerable<BrandViewModel> GetBrands() => _ProductData
+            .GetBrands()
             .Select(brand => new BrandViewModel
             {
                 Id = brand.Id,
