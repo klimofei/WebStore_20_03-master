@@ -132,7 +132,10 @@ namespace WebStore
 
             app.UseStaticFiles();
             app.UseDefaultFiles();
- 
+
+            app.UseStatusCodePages();
+            app.UseStatusCodePagesWithReExecute("/ErrorStatus", "?Code={0}");
+
             app.UseRouting();
 
             app.UseAuthentication();
