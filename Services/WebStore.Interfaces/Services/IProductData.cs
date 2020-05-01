@@ -27,7 +27,7 @@ namespace WebStore.Interfaces.Services
         /// </summary>
         /// <param name="Filter">Критерии поиска/фильтрации</param>
         /// <returns>Искомые товары из каталога товаров</returns>
-        IEnumerable<ProductDTO> GetProducts(ProductFilter Filter = null);
+        PagedProductsDTO GetProducts(ProductFilter Filter = null);
 
 
         /// <summary>Получить товар по идентификатору</summary>
