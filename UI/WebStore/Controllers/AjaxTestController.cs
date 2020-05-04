@@ -34,6 +34,6 @@ namespace WebStore.Controllers
             });
         }
 
-        //public IActionResult SignalRTest() => View();
+        public IActionResult SignalRTest() => View();
     }
 }

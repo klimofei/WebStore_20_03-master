@@ -16,6 +16,7 @@ using WebStore.Clients.Products;
 using WebStore.Clients.Values;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Hubs;
 using WebStore.Infrastructure.AutoMapper;
 using WebStore.Infrastructure.Middleware;
 using WebStore.Infrastructure.Services;
@@ -38,6 +39,8 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
+
 
             services.AddAutoMapper(opt =>
             {
@@ -145,8 +148,12 @@ namespace WebStore
 
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
+            //app.UseSignalR();
+
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<InformationHub>("/info");
+
                 endpoints.MapGet("/greetings", async context =>
                 {
                     await context.Response.WriteAsync(Configuration["CustomGreetings"]);
