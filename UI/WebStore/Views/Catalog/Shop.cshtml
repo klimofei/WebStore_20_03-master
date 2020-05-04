@@ -33,3 +33,15 @@
         </div>
     </div>
 </section>
+
+@section Scripts{
+    <script src="~/lib/jquery-loading-overlay/loadingoverlay.min.js"></script>
+    <script src="~/js/Shop/CatalogLogic.js" asp-append-version="true"></script>
+    <script>
+        $(function() {
+            Catalog.init({
+                getUrl: "@Url.Action("GetFilteredItems","Catalog")"
+            });
+        })
+    </script>
+}
